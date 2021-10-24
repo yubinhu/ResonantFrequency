@@ -9,7 +9,6 @@ from sklearn.ensemble import AdaBoostRegressor
 data_path = "../Data/"
 features_path = data_path + "default_features/"
 annotation_path = data_path + "annotations/"
-filename = "2.csv"
 
 def sample(df):
     # assume column[0] is the time frame, so always sample it
@@ -47,19 +46,31 @@ def read(si):
     # feature.drop(index=feature.index[:30], axis=0, inplace=True)
     return getVectors(feature)
 
+
+
+
+
 ada = load('ada.joblib')
+ada2 = load('ada2.joblib')
 
 def classify(song_id):
     # return True if happy, False if sad
     X = read(song_id)
-    print(X)
+
     y = ada.predict(X)
-    print(y)
-    pos = 0
+    
+
+    happy = 0
+    
     for i in y:
         if i>0:
-            pos+=1
-    return pos>1
+            happy+=1
+    excited = 0
+    y2 = ada2.predict(X)
+    for i in y2:
+        if i>0:
+            excited+=1
+    return happy>1, excited>1
 
-result = classify(3)
+result = classify(910)
 print(result)
