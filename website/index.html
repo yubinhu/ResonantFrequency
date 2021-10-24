@@ -28,7 +28,7 @@
     function raining(json_data) {
       var rain_constant = json_data["rain"];
       if (rain_constant != null) {
-        document.getElementById("image").innerHTML = "<img src = 'images/rain.jpg'>";
+        document.getElementById("image").innerHTML = "<img src = 'images/rain.jpg' style = 'height: 800px; width 500px;'>";
       } else {
         sunny(json_data);
       }
@@ -48,6 +48,6 @@
     <div id="removable">
       <button type="button" onclick="show();">🎵Play a Resonant Frequency🎼</button>
     </div>
-    <div id= "image" class="hi" style = "height: 1024px; width 1440px"></div>
+    <div id= "image" class="hi" style = "height: 800px; width 500px;"></div>
 </body>
 </html>
