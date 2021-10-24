@@ -8,21 +8,33 @@
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat="
-          +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=REDACTED";
+          +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=77280d4ef3599e6997f4a915cc94c349";
           document.getElementById("result").innerHTML = positionInfo;
-          fetch(positionInfo)
-            .then(response => response.json())
-            .then(json => console.log(json));
+          analyzeJSON(positionInfo);
         });
       } else {
         var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat=37.875465&" +
-        "lon=-122.258586&appid=REDACTED";
-        fetch(positionInfo)
-          .then(response => response.json())
-          .then(json => console.log(json));
+        "lon=-122.258586&appid=77280d4ef3599e6997f4a915cc94c349";
+        analyzeJSON(positionInfo);
       }
       document.getElementById('removable').remove();
     }
+
+    function analyzeJSON(apiCall) {
+      fetch(apiCall)
+        .then(response => response.json())
+        .then(json => raining(json)
+        .then(json => raining(json)));
+    }
+
+    function raining(json_data) {
+      var rain_constant = json_data["rain"];
+      if (rain_constant != null) {
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("image").innerHTML = "<img src = 'images/rain.jpg'>";
+      }
+    }
+
 </script>
 </head>
 <body>
@@ -30,5 +42,6 @@
     <div id="removable">
       <button type="button" onclick="show();">🎵Play a Resonant Frequency🎼</button>
     </div>
+    <div id = "image"></div>
 </body>
 </html>
