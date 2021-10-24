@@ -8,7 +8,7 @@
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat="
-          +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=173d82a42cf1523ad7e5376688d9921e";
+          +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=REDACTED";
           document.getElementById("result").innerHTML = positionInfo;
           fetch(positionInfo)
             .then(response => response.json())
@@ -16,7 +16,7 @@
         });
       } else {
         var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat=37.875465&" +
-        "lon=-122.258586&appid=173d82a42cf1523ad7e5376688d9921e";
+        "lon=-122.258586&appid=REDACTED";
         fetch(positionInfo)
           .then(response => response.json())
           .then(json => console.log(json));
