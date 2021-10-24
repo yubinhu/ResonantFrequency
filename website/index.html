@@ -1,7 +1,32 @@
-<!DOCTYPE HTML>
-<html>
-<title>Title? Moodzik?</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moodzik? Title?</title>
+<script>
+    function show() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat="
+          +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=173d82a42cf1523ad7e5376688d9921e";
+          document.getElementById("result").innerHTML = positionInfo;
+          fetch(positionInfo)
+            .then(response => response.json())
+            .then(json => console.log(json));
+        });
+      } else {
+        var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat=37.875465&" +
+        "lon=-122.258586&appid=173d82a42cf1523ad7e5376688d9921e";
+        fetch(positionInfo)
+          .then(response => response.json())
+          .then(json => console.log(json));
+      }
+    }
+</script>
+</head>
 <body>
-  <div id = "ret"> <script src = "js/app.js"></script> </div>
+    <div id="result">
+    </div>
+    <button type="button" onclick="show();">Show Position</button>
 </body>
 </html>
