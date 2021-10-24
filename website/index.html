@@ -21,12 +21,14 @@
           .then(response => response.json())
           .then(json => console.log(json));
       }
+      document.getElementById('removable').remove();
     }
 </script>
 </head>
 <body>
-    <div id="result">
+    <div id="result"></div>
+    <div id="removable">
+      <button type="button" onclick="show();">🎵Play a Resonant Frequency🎼</button>
     </div>
-    <button type="button" onclick="show();">Show Position</button>
 </body>
 </html>
