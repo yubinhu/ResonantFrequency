@@ -9,7 +9,6 @@
         navigator.geolocation.getCurrentPosition(function(position) {
           var positionInfo = "https://api.openweathermap.org/data/2.5/weather?lat="
           +position.coords.latitude+"&lon="+position.coords.longitude+"&appid=77280d4ef3599e6997f4a915cc94c349";
-          document.getElementById("result").innerHTML = positionInfo;
           analyzeJSON(positionInfo);
         });
       } else {
@@ -23,25 +22,32 @@
     function analyzeJSON(apiCall) {
       fetch(apiCall)
         .then(response => response.json())
-        .then(json => raining(json)
-        .then(json => raining(json)));
+        .then(json => raining(json));
     }
 
     function raining(json_data) {
       var rain_constant = json_data["rain"];
       if (rain_constant != null) {
-        document.getElementById("result").innerHTML = "";
         document.getElementById("image").innerHTML = "<img src = 'images/rain.jpg'>";
+      } else {
+        sunny(json_data);
       }
     }
 
+    function sunny(json_data) {
+      document.getElementById("image").innerHTML = "";
+      document.getElementById("image").innerHTML = "<img src = 'images/summer.jpg'>";
+      var current = new Date();
+      if ((json_data['main']['temp_min'] - 273) * 1.8 > 70) {
+        continue;
+      }
+    }
 </script>
 </head>
 <body>
-    <div id="result"></div>
     <div id="removable">
       <button type="button" onclick="show();">🎵Play a Resonant Frequency🎼</button>
     </div>
-    <div id = "image"></div>
+    <div id= "image" class="hi"></div>
 </body>
 </html>
